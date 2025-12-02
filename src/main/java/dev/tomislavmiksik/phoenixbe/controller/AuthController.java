@@ -1,8 +1,8 @@
 package dev.tomislavmiksik.phoenixbe.controller;
 
-import dev.tomislavmiksik.phoenixbe.dto.AuthResponse;
-import dev.tomislavmiksik.phoenixbe.dto.LoginRequest;
-import dev.tomislavmiksik.phoenixbe.dto.RegisterRequest;
+import dev.tomislavmiksik.phoenixbe.dto.auth.AuthResponse;
+import dev.tomislavmiksik.phoenixbe.dto.auth.LoginRequest;
+import dev.tomislavmiksik.phoenixbe.dto.auth.RegisterRequest;
 import dev.tomislavmiksik.phoenixbe.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

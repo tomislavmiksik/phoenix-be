@@ -1,9 +1,13 @@
 package dev.tomislavmiksik.phoenixbe.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.tomislavmiksik.phoenixbe.dto.MeasurementRequest;
-import dev.tomislavmiksik.phoenixbe.dto.MeasurementResponse;
+import dev.tomislavmiksik.phoenixbe.dto.measurements.MeasurementRequest;
+import dev.tomislavmiksik.phoenixbe.dto.measurements.MeasurementResponse;
+import dev.tomislavmiksik.phoenixbe.security.ApiKeyAuthenticationFilter;
+import dev.tomislavmiksik.phoenixbe.security.JwtAuthenticationFilter;
+import dev.tomislavmiksik.phoenixbe.security.JwtTokenProvider;
 import dev.tomislavmiksik.phoenixbe.service.MeasurementService;
+import dev.tomislavmiksik.phoenixbe.service.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +52,18 @@ class MeasurementControllerIntegrationTest {
 
     @MockBean
     private MeasurementService measurementService;
+
+    @MockBean
+    private UserService userService;
+
+    @MockBean
+    private JwtTokenProvider jwtTokenProvider;
+
+    @MockBean
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    @MockBean
+    private ApiKeyAuthenticationFilter apiKeyAuthenticationFilter;
 
     @Test
     @DisplayName("Should successfully create a measurement")

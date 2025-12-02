@@ -1,4 +1,4 @@
-package dev.tomislavmiksik.phoenixbe.dto;
+package dev.tomislavmiksik.phoenixbe.dto.keygen;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

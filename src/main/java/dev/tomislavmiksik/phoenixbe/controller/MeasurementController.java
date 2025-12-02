@@ -1,7 +1,7 @@
 package dev.tomislavmiksik.phoenixbe.controller;
 
-import dev.tomislavmiksik.phoenixbe.dto.MeasurementRequest;
-import dev.tomislavmiksik.phoenixbe.dto.MeasurementResponse;
+import dev.tomislavmiksik.phoenixbe.dto.measurements.MeasurementRequest;
+import dev.tomislavmiksik.phoenixbe.dto.measurements.MeasurementResponse;
 import dev.tomislavmiksik.phoenixbe.service.MeasurementService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

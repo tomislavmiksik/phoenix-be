@@ -1,10 +1,14 @@
 package dev.tomislavmiksik.phoenixbe.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.tomislavmiksik.phoenixbe.dto.AuthResponse;
-import dev.tomislavmiksik.phoenixbe.dto.LoginRequest;
-import dev.tomislavmiksik.phoenixbe.dto.RegisterRequest;
+import dev.tomislavmiksik.phoenixbe.dto.auth.AuthResponse;
+import dev.tomislavmiksik.phoenixbe.dto.auth.LoginRequest;
+import dev.tomislavmiksik.phoenixbe.dto.auth.RegisterRequest;
+import dev.tomislavmiksik.phoenixbe.security.ApiKeyAuthenticationFilter;
+import dev.tomislavmiksik.phoenixbe.security.JwtAuthenticationFilter;
+import dev.tomislavmiksik.phoenixbe.security.JwtTokenProvider;
 import dev.tomislavmiksik.phoenixbe.service.AuthService;
+import dev.tomislavmiksik.phoenixbe.service.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +47,18 @@ class AuthControllerIntegrationTest {
 
     @MockBean
     private AuthService authService;
+
+    @MockBean
+    private UserService userService;
+
+    @MockBean
+    private JwtTokenProvider jwtTokenProvider;
+
+    @MockBean
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    @MockBean
+    private ApiKeyAuthenticationFilter apiKeyAuthenticationFilter;
 
     @Test
     @DisplayName("Should successfully register a new user")

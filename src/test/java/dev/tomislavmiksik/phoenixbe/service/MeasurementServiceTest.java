@@ -1,7 +1,7 @@
 package dev.tomislavmiksik.phoenixbe.service;
 
-import dev.tomislavmiksik.phoenixbe.dto.MeasurementRequest;
-import dev.tomislavmiksik.phoenixbe.dto.MeasurementResponse;
+import dev.tomislavmiksik.phoenixbe.dto.measurements.MeasurementRequest;
+import dev.tomislavmiksik.phoenixbe.dto.measurements.MeasurementResponse;
 import dev.tomislavmiksik.phoenixbe.entity.Measurement;
 import dev.tomislavmiksik.phoenixbe.entity.User;
 import dev.tomislavmiksik.phoenixbe.repository.MeasurementRepository;
@@ -25,7 +25,6 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
 /**
@@ -53,7 +52,7 @@ class MeasurementServiceTest {
     private Authentication authentication;
 
     @InjectMocks
-    private MeasurementService measurementService;
+    private MeasurementServiceImpl measurementService;
 
     private User testUser;
     private User otherUser;

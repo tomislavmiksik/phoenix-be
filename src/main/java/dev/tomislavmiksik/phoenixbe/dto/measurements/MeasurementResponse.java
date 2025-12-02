@@ -1,4 +1,4 @@
-package dev.tomislavmiksik.phoenixbe.dto;
+package dev.tomislavmiksik.phoenixbe.dto.measurements;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,8 +1,8 @@
 package dev.tomislavmiksik.phoenixbe.service;
 
-import dev.tomislavmiksik.phoenixbe.dto.AuthResponse;
-import dev.tomislavmiksik.phoenixbe.dto.LoginRequest;
-import dev.tomislavmiksik.phoenixbe.dto.RegisterRequest;
+import dev.tomislavmiksik.phoenixbe.dto.auth.AuthResponse;
+import dev.tomislavmiksik.phoenixbe.dto.auth.LoginRequest;
+import dev.tomislavmiksik.phoenixbe.dto.auth.RegisterRequest;
 
 public interface AuthService {
 
