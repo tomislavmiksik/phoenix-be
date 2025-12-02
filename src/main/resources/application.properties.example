@@ -7,7 +7,8 @@ spring.profiles.active=dev
 server.port=8080
 
 # JWT Configuration (common across all profiles)
-jwt.secret=404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+# Generate a secure secret key for production use
+jwt.secret=YOUR_JWT_SECRET_KEY_HERE_MINIMUM_256_BITS
 jwt.expiration=86400000
 
 # Logging Configuration (can be overridden by profiles)
@@ -15,4 +16,5 @@ logging.level.root=INFO
 logging.level.dev.tomislavmiksik.phoenixbe=INFO
 
 # ApiKey configurations
+# 7776000000ms = 90 days
 apikey.expiration-offset-ms=7776000000
