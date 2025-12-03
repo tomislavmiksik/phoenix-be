@@ -17,7 +17,7 @@ import java.time.Duration;
 @AllArgsConstructor
 public class ApiKeyRequest {
 
-    @NotBlank(message = "Username is required")
+    @NotBlank(message = "Label is required")
     private String label;
 
     private Duration validFor;

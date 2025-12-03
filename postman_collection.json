@@ -1,0 +1,314 @@
+{
+	"info": {
+		"name": "Phoenix BE API",
+		"description": "Complete API collection for Phoenix Backend with JWT and API Key authentication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{jwt_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"johndoe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"password123\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						},
+						"description": "Register a new user. Returns JWT token in response."
+					},
+					"response": [],
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.token) {",
+									"        pm.environment.set(\"jwt_token\", jsonData.token);",
+									"        console.log(\"JWT token saved to environment\");",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"johndoe\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login with username and password. Returns JWT token in response."
+					},
+					"response": [],
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.token) {",
+									"        pm.environment.set(\"jwt_token\", jsonData.token);",
+									"        console.log(\"JWT token saved to environment\");",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					]
+				}
+			],
+			"description": "Authentication endpoints for user registration and login"
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Generate API Key",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"description\": \"API key description\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/admin/keygen",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"keygen"
+							]
+						},
+						"description": "Generate a new API key. Requires ADMIN role."
+					},
+					"response": []
+				}
+			],
+			"description": "Admin endpoints requiring ADMIN role"
+		},
+		{
+			"name": "Measurements",
+			"item": [
+				{
+					"name": "Create Measurement",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"weight\": 75.5,\n  \"height\": 180.0,\n  \"chestCircumference\": 95.5,\n  \"armCircumference\": 32.0,\n  \"legCircumference\": 58.0,\n  \"waistCircumference\": 85.0,\n  \"measurementDate\": \"2025-12-03T10:30:00\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/measurements",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"measurements"
+							]
+						},
+						"description": "Create a new measurement record"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Measurements",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/measurements",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"measurements"
+							]
+						},
+						"description": "Retrieve all measurements"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Recent Measurements",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/measurements/recent?limit=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"measurements",
+								"recent"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Number of recent measurements to retrieve (default: 10)"
+								}
+							]
+						},
+						"description": "Retrieve the most recent measurements with optional limit"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Measurement by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/measurements/{{measurement_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"measurements",
+								"{{measurement_id}}"
+							]
+						},
+						"description": "Retrieve a specific measurement by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Measurement",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"weight\": 76.0,\n  \"height\": 180.0,\n  \"chestCircumference\": 96.0,\n  \"armCircumference\": 32.5,\n  \"legCircumference\": 58.5,\n  \"waistCircumference\": 84.5,\n  \"measurementDate\": \"2025-12-03T11:00:00\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/measurements/{{measurement_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"measurements",
+								"{{measurement_id}}"
+							]
+						},
+						"description": "Update an existing measurement"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Measurement",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/measurements/{{measurement_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"measurements",
+								"{{measurement_id}}"
+							]
+						},
+						"description": "Delete a measurement by ID"
+					},
+					"response": []
+				}
+			],
+			"description": "Measurement management endpoints"
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

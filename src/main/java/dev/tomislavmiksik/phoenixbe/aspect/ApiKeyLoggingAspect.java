@@ -34,7 +34,7 @@ public class ApiKeyLoggingAspect {
      */
     @Pointcut("within(dev.tomislavmiksik.phoenixbe.service..*)" +
             " || within(dev.tomislavmiksik.phoenixbe.repository..*)" +
-            " || within(dev.tomislavmiksik.phoenixbe.controller..*)")
+            " || (within(dev.tomislavmiksik.phoenixbe.controller..*) && !within(*..AuthController))")
     public void applicationPackagePointcut() {
         // Method is empty as this is just a Pointcut, the implementations are in the advices.
     }
