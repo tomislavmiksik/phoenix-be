@@ -1,5 +1,6 @@
 package dev.tomislavmiksik.phoenixbe.service;
 
+import dev.tomislavmiksik.phoenixbe.dto.keygen.ApiKeyResponse;
 import dev.tomislavmiksik.phoenixbe.entity.ApiKey;
 import dev.tomislavmiksik.phoenixbe.repository.ApiKeyRepository;
 import dev.tomislavmiksik.phoenixbe.util.ApiKeyGenerator;
@@ -24,7 +25,7 @@ public class AdminServiceImpl implements AdminService {
 
 
     @Override
-    public ApiKey createApiKey(String label) {
+    public ApiKeyResponse createApiKey(String label) {
         Duration expirationOffset = Duration.of(expirationDateOffset, ChronoUnit.MILLIS);
         String rawKey = ApiKeyGenerator.generateKey();
 
@@ -35,7 +36,12 @@ public class AdminServiceImpl implements AdminService {
                 .createdAt(Instant.now())
                 .active(true)
                 .build();
+        apiKeyRepository.save(apiKey);
 
-        return apiKeyRepository.save(apiKey);
+        return ApiKeyResponse
+                .builder()
+                .apiKey(rawKey)
+                .build();
+
     }
 }

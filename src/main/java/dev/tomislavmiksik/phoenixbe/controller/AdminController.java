@@ -25,12 +25,7 @@ public class AdminController {
     @PostMapping("/keygen")
     public ResponseEntity<?> createApiKey(@Valid @RequestBody ApiKeyRequest body){
         try {
-            ApiKey createdKey = adminService.createApiKey(body.getLabel());
-
-            ApiKeyResponse response = ApiKeyResponse
-                    .builder()
-                    .apiKey(createdKey.getKeyHash())
-                    .build();
+            ApiKeyResponse response = adminService.createApiKey(body.getLabel());
 
             return ResponseEntity.ok(response);
         } catch (Exception e) {

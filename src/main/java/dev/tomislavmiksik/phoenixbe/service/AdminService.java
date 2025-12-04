@@ -1,6 +1,7 @@
 package dev.tomislavmiksik.phoenixbe.service;
 
 
+import dev.tomislavmiksik.phoenixbe.dto.keygen.ApiKeyResponse;
 import dev.tomislavmiksik.phoenixbe.entity.ApiKey;
 
 /**
@@ -14,5 +15,5 @@ public interface AdminService {
      * @param label the label
      * @return the api key
      */
-     ApiKey createApiKey(String label);
+     ApiKeyResponse createApiKey(String label);
 }

@@ -33,15 +33,13 @@ public class ApiKeyAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getRequestURI();
-        return pathMatcher.match("/api/admin/**", path);
+        return pathMatcher.match("/api/admin/**", path) || pathMatcher.match("/api/auth/**", path);
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-
-
         String key = request.getHeader(AUTH_TOKEN_HEADER_NAME);
 
         if(key == null || key.isEmpty()){
