@@ -19,21 +19,13 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest request) {
-        try {
-            AuthResponse response = authService.register(request);
-            return ResponseEntity.status(HttpStatus.CREATED).body(response);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        AuthResponse response = authService.register(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {
-        try {
-            AuthResponse response = authService.login(request);
-            return ResponseEntity.ok(response);
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-        }
+        AuthResponse response = authService.login(request);
+        return ResponseEntity.ok(response);
     }
 }
